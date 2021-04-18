@@ -3,7 +3,29 @@ package com.vn.pakage1;
 public class Main {
 
 	public static void main(String[] args) {
+		// Du lieu test
+		QuanLySinhVien.list.add(new SinhVien("1", "VY", "HUNG", 2001, "NAM")); // Nhap 3 Sinh vien
+		QuanLySinhVien.list.add(new SinhVien("2", "NGUYEN", "LONG", 2001, "NAM"));
+		QuanLySinhVien.list.add(new SinhVien("3", "TRAN", "HA", 2001, "NU"));
+		
+		QuanLyMonHoc.list.add(new MonHoc("1", "Toan", 2)); //Nhap 3 Mon hoc
+		QuanLyMonHoc.list.add(new MonHoc("2", "Van", 2));
+		QuanLyMonHoc.list.add(new MonHoc("3", "Anh", 1.5));
+		
+		QuanLyDiem.list.add(new Diem("1", "1", 10)); // Diem sinh vien 1
+		QuanLyDiem.list.add(new Diem("1", "2", 10));
+		QuanLyDiem.list.add(new Diem("1", "3", 10));
+		
+		QuanLyDiem.list.add(new Diem("2", "1", 8)); // Diem sinh vien 2
+		QuanLyDiem.list.add(new Diem("2", "2", 7));
+		
+		QuanLyDiem.list.add(new Diem("3", "1", 2)); // Diem sinh vien 3
+		QuanLyDiem.list.add(new Diem("3", "2", 5));
+		QuanLyDiem.list.add(new Diem("3", "3", 3));
+		
+		/// Ham Main
 		QuanLy();
+		
 
 	}
 
@@ -25,7 +47,20 @@ public class Main {
 	}
 
 	private static void TimKiem() {
-		
+		do {
+			System.out.println("==========TIM KIEM=========");
+			System.out.println("\t1.TIM KIEM THEO MA SV");
+			System.out.println("\t2.TIM KIEM THEO MA MH");
+			System.out.println("\t3.Thoat chuong trinh !");
+			System.out.println("\t0.Quay tre ve QUAN LY SINH VIEN");
+			int chon = Integer.parseInt(Support.sc.nextLine());
+			switch(chon) {
+			case 1 : QuanLySinhVien.TimKiemTheoMSV();break;
+			case 2 : QuanLyMonHoc.TimKiemTheoMaMH();break;
+			case 3 : System.out.println("Da Thoat Chuong trinh !"); System.exit(0) ;	
+			case 0 : return ;	
+			}
+		}while(true);
 		
 	}
 
@@ -39,7 +74,7 @@ public class Main {
 			int chon = Integer.parseInt(Support.sc.nextLine());
 			switch(chon) {
 			case 1 : QuanLySinhVien.HienThiBangDiem();;break;
-			case 2 : HienThiDiemTheoMH();break;
+			case 2 : QuanLyMonHoc.HienThiBangDiem();break;
 			case 3 : System.out.println("Da Thoat Chuong trinh !"); System.exit(0) ;	
 			case 0 : return ;	
 			}

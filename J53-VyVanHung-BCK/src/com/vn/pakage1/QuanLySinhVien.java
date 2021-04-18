@@ -133,10 +133,11 @@ public class QuanLySinhVien {
 			}
 		});
 		int maBangDiem=0;
-		
-		for(SinhVien i : list) {
-			System.out.printf("%-15s %n","STT/MaBangDiem");
-			System.out.printf("%-10d",++maBangDiem);
+		System.out.println("===============HIEN THI BANG DIEM THEO TEN SINH VIEN===============");
+		for(SinhVien i : list) {  // duyet list sv 
+			System.out.println("-----------------------------------");
+			System.out.printf("%n%-15s :","STT/MaBangDiem");
+			System.out.printf("%-10d%n%n",++maBangDiem);
 			System.out.println("=========BANG DIEM========");
 			SinhVien.TieuDe();
 			i.xuat();
@@ -145,21 +146,54 @@ public class QuanLySinhVien {
 			double tongdiemHeso=0;
 			double tongHeSo=0;
 			
-			System.out.printf("%-10s  %-10s %-10s","STT","Ten MH","Diem");
-			for(Diem j : QuanLyDiem.list) {
+			System.out.printf("%n%n%-10s  %-10s %-10s%n","STT","Ten MH","Diem");
+			for(Diem j : QuanLyDiem.list) {  // tu moi ma sinh vien tim kiem xem sinh vien da có trong Database diem chua 
 				if(j.getMaSinhVien().equals(i.getMaSinhVien())) {
 					int index = Support.IndexOfMaMonHoc(QuanLyMonHoc.list, j.getMaMonHoc());
 					String tenMonHoc = QuanLyMonHoc.list.get(index).getTenMonHoc();
 					double heSoMon = QuanLyMonHoc.list.get(index).getHeSoMon();
 					double diem = j.getDiemSo();
-					System.out.printf("%-10d  %-10s %-10.3f",++stt,tenMonHoc,diem);
+					System.out.printf("%-10d  %-10s %-10.3f%n",++stt,tenMonHoc,diem);
 					tongdiemHeso+=diem*heSoMon;
 					tongHeSo+=heSoMon;
 					
 				}
 			}
 			if(tongHeSo!=0)
-			System.out.printf("%30.f",tongdiemHeso/tongHeSo);
+			System.out.printf("%-10s%-10.3f%n","DIEM TK",tongdiemHeso/tongHeSo);
 		}
-	}		
+	}	
+	
+	public static void TimKiemTheoMSV() {
+		System.out.println("\t===========TIM KIEM THEO MA SINH VIEN==============");
+		System.out.println("Nhap ma sinh vien : ");
+		String maSinhVien = Support.sc.nextLine();
+		int index = Support.IndexOfMaSinhVien(list, maSinhVien);
+		if(index==-1) {
+			System.out.println("Ma Sinh Vien nay khong ton tai !");
+			return;
+		}
+		
+		System.out.println("\t-------Tim Thay--------");
+		System.out.printf("%-15s %-10s","Ten SV :",list.get(index).getTen());
+		System.out.printf("%n%n%-10s  %-10s %-10s%n","STT","Ten MH","Diem");
+		int stt=0;
+		double tongdiemHeso=0;
+		double tongHeSo=0;
+		for(Diem j : QuanLyDiem.list) {  // tu moi ma sinh vien tim kiem xem sinh vien da có trong Database diem chua 
+			if(j.getMaSinhVien().equals(maSinhVien)) {
+				int indexOfMaMH = Support.IndexOfMaMonHoc(QuanLyMonHoc.list, j.getMaMonHoc());
+				String tenMonHoc = QuanLyMonHoc.list.get(indexOfMaMH).getTenMonHoc();
+				double heSoMon = QuanLyMonHoc.list.get(indexOfMaMH).getHeSoMon();
+				double diem = j.getDiemSo();
+				System.out.printf("%-10d  %-10s %-10.3f%n",++stt,tenMonHoc,diem);
+				tongdiemHeso+=diem*heSoMon;
+				tongHeSo+=heSoMon;
+				
+			}
+		}
+		if(tongHeSo!=0)
+		System.out.printf("%-10s%-10.3f%n","DIEM TK",tongdiemHeso/tongHeSo);
+	}
+	
 }

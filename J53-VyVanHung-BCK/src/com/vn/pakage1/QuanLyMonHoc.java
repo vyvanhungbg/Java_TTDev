@@ -115,9 +115,59 @@ public class QuanLyMonHoc {
 		}
 		
 		public static void HienThiBangDiem() {
-			/
-			//
-			/
-			/
+			System.out.println("===================HIEN THI BANG DIEM THEO MON HOC==============");
+			int maBangDiem=0;
+			for(int i=0;i<list.size();i++) {   // list mon hoc
+				System.out.println("----------------------------------------");
+				System.out.printf("%n%n%-15s :","STT/MaBangDiem");
+				System.out.printf("%-10d %n",++maBangDiem);
+				System.out.println("=========BANG DIEM========");
+				MonHoc.TieuDe();
+				list.get(i).xuat();
+				System.out.printf("%-10s : %-10.3f %n","DIEM TB MH",Support.TBDiemTheoMaMH(QuanLyDiem.list, list.get(i).getMaMonHoc()));
+				System.out.println("\t---------DANH SACH SINH VIEN HOC MON HOC -------");
+				System.out.printf("%-10s %-10s %-10s %-10s %n","STT","ma SV","ten SV","diem");
+				int stt=0;
+				for(int j=0;j<QuanLyDiem.list.size();j++) { // list diem
+					String maMH = QuanLyDiem.list.get(j).getMaMonHoc();
+					if(list.get(i).getMaMonHoc().equals(maMH)) {
+						int index = Support.IndexOfMaSinhVien(QuanLySinhVien.list,QuanLyDiem.list.get(j).getMaSinhVien());
+						String maSV = QuanLySinhVien.list.get(index).getMaSinhVien();
+						String tenMH = QuanLySinhVien.list.get(index).getTen();
+						double diem = QuanLyDiem.list.get(j).getDiemSo();
+						System.out.printf("%-10d %-10s %-10s %-10.3f %n",++stt,maSV,tenMH,diem);
+					}
+				}
+			}
+		}
+		
+		public static void TimKiemTheoMaMH() {
+			System.out.println("\t-------TIM KIEM THEO MA MON HOC--------");
+			System.out.println("Nhap ma Mon Hoc : ");
+			String maMonHoc = Support.sc.nextLine();
+			int index = Support.IndexOfMaMonHoc(list, maMonHoc);
+			if(index==-1) {
+				System.out.println("Ma Mon Hoc nay khong ton tai !");
+				return;
+			}
+			
+			System.out.println("\t-------Tim Thay--------");
+			System.out.printf("%-15s %-10s %n","Ten MH :",list.get(index).getTenMonHoc());
+			
+			
+			System.out.println("\t---------DANH SACH SINH VIEN HOC MON HOC -------");
+			System.out.printf("%-10s %-10s %-10s %-10s %n","STT","ma SV","ten SV","diem");
+			int stt=0;
+			for(int j=0;j<QuanLyDiem.list.size();j++) { // list diem
+				String maMH = QuanLyDiem.list.get(j).getMaMonHoc();
+				if(list.get(index).getMaMonHoc().equals(maMH)) {
+					int indexofMaSV = Support.IndexOfMaSinhVien(QuanLySinhVien.list,QuanLyDiem.list.get(j).getMaSinhVien());
+					String maSV = QuanLySinhVien.list.get(indexofMaSV).getMaSinhVien();
+					String tenMH = QuanLySinhVien.list.get(indexofMaSV).getTen();
+					double diem = QuanLyDiem.list.get(j).getDiemSo();
+					System.out.printf("%-10d %-10s %-10s %-10.3f %n",++stt,maSV,tenMH,diem);
+				}
+			}
+			System.out.printf("%-10s : %-10.3f %n","DIEM TB MH",Support.TBDiemTheoMaMH(QuanLyDiem.list, maMonHoc));
 		}
 }

@@ -3,6 +3,8 @@ package com.vn.pakage1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 public class Support {
 
 	static Scanner sc = new Scanner(System.in);
@@ -64,6 +66,20 @@ public class Support {
 			return -1;	
 		}
 		
-	// Lay ten cua mon hoc tu ma mon hoc
+	// Tong diem cua mon hoc theo ma mon hoc
+		public static double TBDiemTheoMaMH(ArrayList<Diem> list , String maMonHoc) {
+			double tongDiem =0;
+			int soSVHoc = 0;
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getMaMonHoc().equals(maMonHoc)) {
+						tongDiem+=list.get(i).getDiemSo();
+						soSVHoc++;
+					}
+				}
+			
+			if(soSVHoc!=0) return tongDiem/soSVHoc;
+			else
+				return 0;
+		}
 		
 }
